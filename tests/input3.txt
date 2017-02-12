@@ -1,0 +1,28 @@
+@nesto slicno kao zadtak 9
+
+
+.text
+	int 10		    @ instrukcija int 
+	cmps r1 r2	     @ instuckija cmp sa oznakom da psw treba da se menja
+	in r1 r2 	     @ instruckija in
+	shr r3 r1 >> #2	     @ instrukcija shr 
+	shl r2 r3 << #4	     @ instrukcija shl
+	.align 6             @poravnavanje tako da LC % 6 = 0
+	
+.text.second
+
+	 ldch r1 #-2		@koriscenje instruckije ldch ldcl i pseudoinstruckije ldc
+_labela: ldcl r1 #-2
+	 ldc  r1 #1
+	 ldc  r1 #-1
+	 ldc  r1 _labela
+	
+.data 
+string:	.char niz reci           @ direktiva .char upisuje argument znak po znak u memoriju
+word_array: .word 2048	         @ direkiva .word upisuje 2B
+byte_array: .byte 15,1		 @ direktiva .byte upisuje 1B
+
+
+.skip 10
+long_lab:   .long 12348       @ direktiva .long upisuje 4B
+.end

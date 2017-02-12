@@ -1,0 +1,57 @@
+@  sve instruckije i direktive
+
+.public a,b,c
+.extern e,d
+.data.DATA
+
+LONG: .long 10,20,30
+BYTE: .byte 1,2,3
+CHAR: .char CHAR_STRING
+.align 4
+SKIP: .skip 8
+WORD: .word 255
+IZRAZ1: .long a - b
+IZRAZ2: .long CHAR + 5 
+IZRAZ3: .long 32 + 64
+a: .long b
+b: .long c
+c: .long a
+.text.TEXT
+	int 15
+	
+	add r1 r2
+	subgts r2 #5
+	muleq r15 r3
+	div	r1 r2
+	cmps r1 r2
+	
+	ands r1 r2
+	ors  r1 r2
+	tests r1 r2
+	
+	ldr r3++ r4 #5
+	str r3-- r4 #5
+	ldr ++r3 r4 #5
+	str --r3 r4 #5
+	 
+	call r1 #255
+	call a
+	in r1 r5
+	out r4 r8
+	
+	movne r1 r2 
+	shrlt r1 r2 >> #7
+	shlgt r1 r2 << #7
+	
+	ldcl r1 #1
+	ldch r1 #-1
+	ldc  r1 #-2048
+	
+	ldcl r1 a
+	ldch r1 b
+	ldc  r1 c
+.bss.BSS
+f: skip 20
+.end
+
+

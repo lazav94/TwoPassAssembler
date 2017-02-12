@@ -1,0 +1,52 @@
+@ Primer sa casa, zbog nedostatka intrukcija ovaj primer nije ispravan
+@ Cilj je da se pokazu sto vise razlicitih instrukcija
+@ Naci maskimum 2 broja koja se unose sa standardnog ulaza i ispisati veci od njih
+
+.data 
+	input:	
+		.char "%d%d"
+	.extern output
+	
+.text
+	.extern printf
+	.extern scanf
+	.extern exit  	   @externa - oznaca da ove simbole uvozimo iz drugih
+			   @sekcija, ovi simboli ne smeju biti definisani
+	.public _start     @public - oznacava da je ovo globalni simbol
+	
+_start:				
+	call main          @ poziv main()
+	sub r1 r1          @ r1 = r1 - r1 = 0
+	str sp++ r1        @ na adresi sp (stack pointera ) stavimo r1 i onda sp uvecamo za # 
+	call exit	   @ poziv exit()
+
+.public max
+
+.text.main_func
+main: 
+	sub sp #8          @ sp = sp - 8      
+			   @ ostavljamo mesta za argumente 
+	ldr --sp r2        @ sa adrese sp - 4 uzimamo podatak i smestamo ga u r2 
+	str sp++ r2        
+	ldr --sp r2
+	str sp++ r2        
+	
+	str sp++ r0
+	call scanf         @ pozivamo scanf za unos parametra
+	add sp #12         @ oslobadjamo stek
+	
+	call max           @ poziv fje max
+	
+.text.max_func
+max: 
+					   @argumenti su u r1 i r0
+	ldr r0 sp #-4
+	ldr r1 sp #-8
+	cmps  r0 r1	   @ instukcija compare sa promenom psw registara
+	movlt r2 r1	   @ instrukcija mov sa uslovom 
+	movge r2 r0	   @ instrukcija mov sa uslovom 
+	
+	
+	
+	
+	

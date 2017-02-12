@@ -1,0 +1,32 @@
+@nesto slicno kao zadtak 9
+
+.public a,c		@ globalni simboli 
+.extern b		@ externi simloli
+	
+.text		        @ sekcija text
+	call a          @ instrukcija call sa labelom 
+	call e          @ instrukcija call sa labelom 
+	call b          @ instrukcija call sa labelom 
+	call d          @ instrukcija call sa labelom 
+d: .long d		@ labela d: koja uzima vrednos lc i direktiva .long koja zauzima 4B vrednosti labele d
+	ldr r1 a	@ instrukcija ldr sa labelom
+	str r1 c	@ instrukcija ldr sa labelom
+	ldr r1 e	@ instrukcija ldr sa labelom
+	
+.data 			@ sekcija data
+	.skip 8		@ direktiva skip kojom upisujemo 8B i popunjavamo vrednoscu 0
+e:  .long a - e		@ direktiva long sa izrazom (2 labele koje moraju biti iz istih sekcija)
+	.long c		@ direktiva long sa labelom (upisujemo vrednost simbola c)
+	.long bss
+a:  .long b	
+
+.bss			@ sekcija bss
+c: .skip 8
+.end
+	
+
+
+	
+	
+	
+	
